@@ -1,0 +1,23 @@
+import openai
+import os
+from dotenv import load_dotenv
+import time
+global User_Prompt
+from User_Prompt import User_Prompt
+
+
+def configure():
+    load_dotenv()
+
+configure()
+
+openai.api_key = os.getenv("api_key")
+openai.Model.list()
+
+response = openai.Image.create(
+    prompt = User_Prompt,
+    n=1,
+    size = "512x512"
+)
+
+image_url = response['data'][0]['url']
